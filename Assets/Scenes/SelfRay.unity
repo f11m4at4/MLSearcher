@@ -220,6 +220,8 @@ GameObject:
   - component: {fileID: 121649947}
   - component: {fileID: 121649952}
   - component: {fileID: 121649951}
+  - component: {fileID: 121649954}
+  - component: {fileID: 121649953}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -331,9 +333,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5532753f8a5eb4c905b4e90c906b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 1000
   rotSpeed: 100
   moveSpeed: 5
   gm: {fileID: 811135757}
+  detectableTags:
+  - Item
+  - Obstacle
+  - Wall
+  rayLayerMask:
+    serializedVersion: 2
+    m_Bits: 448
+  rayLength: 20
+  sphereCastRadius: 0.5
+  raysPerDirection: 2
+  maxRayDegrees: 60
+--- !u!114 &121649953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121649946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
+--- !u!114 &121649954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121649946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 1
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 0300000002000000
+    VectorActionSize: 0300000002000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 1
+  m_BehaviorName: My Behavior
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!1 &200464751
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +407,7 @@ GameObject:
   - component: {fileID: 200464754}
   - component: {fileID: 200464753}
   - component: {fileID: 200464752}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacle (2)
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -441,7 +502,7 @@ GameObject:
   - component: {fileID: 287495602}
   - component: {fileID: 287495601}
   - component: {fileID: 287495600}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacle (3)
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -588,7 +649,7 @@ GameObject:
   - component: {fileID: 934266371}
   - component: {fileID: 934266370}
   - component: {fileID: 934266369}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -683,7 +744,7 @@ GameObject:
   - component: {fileID: 1044876456}
   - component: {fileID: 1044876455}
   - component: {fileID: 1044876454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Item
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -778,7 +839,7 @@ GameObject:
   - component: {fileID: 1096121200}
   - component: {fileID: 1096121199}
   - component: {fileID: 1096121198}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacle
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -873,7 +934,7 @@ GameObject:
   - component: {fileID: 1150611030}
   - component: {fileID: 1150611029}
   - component: {fileID: 1150611028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -968,7 +1029,7 @@ GameObject:
   - component: {fileID: 1286692144}
   - component: {fileID: 1286692143}
   - component: {fileID: 1286692142}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacle (1)
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -1156,7 +1217,7 @@ GameObject:
   - component: {fileID: 1954368425}
   - component: {fileID: 1954368424}
   - component: {fileID: 1954368423}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1346,7 +1407,7 @@ GameObject:
   - component: {fileID: 2064500841}
   - component: {fileID: 2064500840}
   - component: {fileID: 2064500839}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
