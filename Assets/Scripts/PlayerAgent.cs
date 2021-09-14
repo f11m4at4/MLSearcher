@@ -15,10 +15,17 @@ public class PlayerAgent : MonoBehaviour
     Rigidbody rb;
 
     public GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gm.Reset();
+    }
+
+    private void Reset()
+    {
+        rb.velocity = Vector3.zero;
         gm.Reset();
     }
 
@@ -52,5 +59,22 @@ public class PlayerAgent : MonoBehaviour
         // 2. 방향이 필요
         // 3. 이동하고 싶다.
         rb.velocity = transform.forward * move * moveSpeed;
+    }
+
+    // Player 가 다른 물체와 부딪혔을 때 처리
+    private void OnCollisionEnter(Collision other)
+    {
+        // Item 하고 부딪히면
+        if (other.gameObject.CompareTag("Item"))
+        {
+            // -> 참 잘했어요~~~
+            Reset();
+        }
+        // 장애물하고 부딪히면
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            // -> 때끼!
+            Reset();
+        }
     }
 }
