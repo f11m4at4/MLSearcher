@@ -13,10 +13,13 @@ public class PlayerAgent : MonoBehaviour
     // 필요속성 : 이동속도
     public float moveSpeed = 5;
     Rigidbody rb;
+
+    public GameManager gm;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gm.Reset();
     }
 
     // Update is called once per frame
