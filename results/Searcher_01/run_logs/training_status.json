@@ -1,0 +1,29 @@
+{
+    "Searcher": {
+        "checkpoints": [
+            {
+                "steps": 89794,
+                "file_path": "results\\Searcher_01\\Searcher\\Searcher-89794.onnx",
+                "reward": null,
+                "creation_time": 1631673072.2732134,
+                "auxillary_file_paths": [
+                    "results\\Searcher_01\\Searcher\\Searcher-89794.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 89794,
+            "file_path": "results\\Searcher_01\\Searcher.onnx",
+            "reward": null,
+            "creation_time": 1631673072.2732134,
+            "auxillary_file_paths": [
+                "results\\Searcher_01\\Searcher\\Searcher-89794.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.9.0+cu111"
+    }
+}

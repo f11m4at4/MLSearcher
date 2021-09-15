@@ -150,6 +150,7 @@ public class PlayerAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
+        AddReward(-1.0f / MaxStep);
         // 2. 방향이 필요
         float dir = actions.DiscreteActions.Array[0] - 1;
         float move = actions.DiscreteActions.Array[1];
@@ -194,13 +195,23 @@ public class PlayerAgent : Agent
         if (other.gameObject.CompareTag("Item"))
         {
             // -> 참 잘했어요~~~
+            AddReward(10);
             EndEpisode();
         }
         // 장애물하고 부딪히면
         if (other.gameObject.CompareTag("Obstacle"))
         {
             // -> 때끼!
+            AddReward(-1);
             EndEpisode();
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Wall"))
+        {
+            AddReward(-0.01f);
         }
     }
 }
