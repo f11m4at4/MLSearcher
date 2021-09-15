@@ -67,10 +67,68 @@ public class PlayerAgent : Agent
             bool bHit = Physics.SphereCast(ray, sphereCastRadius, out hitInfo, rayLength, rayLayerMask.value);
             // 3. 부딪힌 녀석의 정보가 필요
             // 4. 관찰요소를 만들어 보내주고 싶다.
+            // 4-1 관찰데이터를 만들기
+            if (bHit)
+            {
+                // Tag 데이터 할당
+                for (int i = 0; i < detectableTags.Length; i++)
+                {
+                    string tag = detectableTags[i];
+                    // 만약 부딪힌 물체의 테그가 감지 테그와 같다면
+                    if (hitInfo.transform.CompareTag(tag))
+                    {
+                        // 그 테그쪽 데이터를 1로 활성화 시켜주자
+                        data[i] = 1;
+                        break;
+                    }
+                }
+                // 부딪혔다고 세팅 0으로
+                data[3] = 0;
+                // 부딪힌 물체와의 거리 -> Normalize 
+                data[4] = hitInfo.distance / rayLength;
+            }
+            // 4-2 데이터 보내기
             sensor.AddObservation(data);
 
             // Ray 그리기
             Debug.DrawLine(ray.origin, hitInfo.point, Color.red);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        int totalRayCount = raysPerDirection * 2 + 1;
+        // -> 각 Ray 당 각도
+        float delta = maxRayDegrees / raysPerDirection;
+        // -> 각 Ray 의 실제 각도
+        float[] angles = new float[totalRayCount];
+        // -> 정 중앙 Ray 는 각도가 0
+        angles[0] = 0;
+        // 나머지 Ray 들의 각도 구하기
+        for (int i = 0; i < raysPerDirection; i++)
+        {
+            // 왼쪽 각도
+            angles[2 * i + 1] = -(i + 1) * delta;
+            // 오른쪽 각도
+            angles[2 * i + 2] = (i + 1) * delta;
+        }
+        foreach (float angle in angles)
+        {
+            // 최종 보낼 관찰 데이터 선언
+            float[] data = { 0, 0, 0, 1, 0 };
+            // 2. Ray 를 쐈으니까
+            Vector3 dir = Quaternion.AngleAxis(angle, transform.up) * transform.forward;
+            Ray ray = new Ray(transform.position, dir);
+            RaycastHit hitInfo;
+            bool bHit = Physics.SphereCast(ray, sphereCastRadius, out hitInfo, rayLength, rayLayerMask.value);
+
+            if (bHit)
+            {
+                Gizmos.color = Color.red;
+                // Ray 그리기
+                Gizmos.DrawLine(ray.origin, hitInfo.point);
+                Gizmos.DrawWireSphere(hitInfo.point, sphereCastRadius);
+            }
         }
     }
 
